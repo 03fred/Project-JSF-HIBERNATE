@@ -114,7 +114,10 @@
 	</bean>
 
 
-<bean id="reportUtil" class="br.com.project.report.util.reportUtil"
+<bean id="reportUtil" class="br.com.project.report.util.ReportUtil"/>
+<bean id="utilFramework" class="br.com.framework.utils.UtilFramework" scope="session"/>
+
+
 
 </beans>
 
