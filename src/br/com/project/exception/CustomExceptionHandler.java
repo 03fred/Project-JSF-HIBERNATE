@@ -1,4 +1,4 @@
-package br.com.projeto.exception;
+package br.com.project.exception;
 
 import java.util.Iterator;
 import java.util.Map;

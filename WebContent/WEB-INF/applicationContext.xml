@@ -61,7 +61,6 @@
 	  <property name="dataSource" ref="springDataSource"/>
 	</bean>
 	
-	
 	<bean id="jdbcTemplate" name="jdbcTemplate"
 		class="br.com.framework.implementacao.crud.JdbcTemplateImpl">
 		<constructor-arg name="dataSource" ref="springDataSource" />
@@ -120,6 +119,5 @@
 	 <bean id="utilFramework" class="br.com.framework.utils.UtilFramework" scope="session"/> 
 	 
 	 
-	
 
 </beans>

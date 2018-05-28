@@ -1,4 +1,4 @@
-package br.com.projeto.exception;
+package br.com.project.exception;
 
 import javax.faces.context.ExceptionHandler;
 import javax.faces.context.ExceptionHandlerFactory;
