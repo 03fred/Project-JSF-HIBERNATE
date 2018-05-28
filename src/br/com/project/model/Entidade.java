@@ -7,6 +7,8 @@ import javax.persistence.Id;
 
 import org.hibernate.envers.Audited;
 
+import com.sun.org.apache.bcel.internal.generic.GETFIELD;
+
 @Audited
 @Entity
 public class Entidade implements Serializable {
@@ -18,7 +20,17 @@ public class Entidade implements Serializable {
 
 	private String ent_login = null;
 	private String ent_senha;
-
+    private boolean ent_inativo = false;
+    
+    
+    public void setEnt_inativo(boolean ent_inativo) {
+		this.ent_inativo = ent_inativo;
+	}
+    
+    public void getEnt_inativo(boolean ent_inativo) {
+  		this.ent_inativo = ent_inativo;
+    }
+   
 	public String getEnt_login() {
 
 		return ent_login;

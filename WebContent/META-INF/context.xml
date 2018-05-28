@@ -10,6 +10,6 @@
 		numTestsPerEvictionRun="5" timeBetweenEvictionRunsMillis="500"
 		minEvictableIdleTimeMillis="6000" antiJarLocking="false"
 		antiResourceLocking="false" username="postgres" password="0"
-		url="jdbc:postgresql://localhost:5432/dados?autoReconect=true" />
+		url="jdbc:postgresql://localhost:5432/udemy?autoReconect=true" />
 
 </Context>

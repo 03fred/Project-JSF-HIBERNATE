@@ -7,7 +7,7 @@
 		http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 
 
-	<global-method-security secured-annotations="enable" />
+	<global-method-security secured-annotations="enabled" />
 	<http auto-config="true" access-denied-page="/error/acessoNegado.xhtml"
 		use-expressions="true">
 
@@ -52,4 +52,28 @@ hasAnyRole('USER')" />
 		</session-management>
 
 	</http>
+
+	<authentication-manager>
+		<authentication-provider>
+
+			<password-encoder hash="plaintext" />
+			<jdbc-user-service data-source-ref="springDataSource"
+				users-by-username-query="SELECT ENT_LOGIN AS USERNAME,
+    ENT_SENHA AS PASSWORD,
+    'TRUE' AS ENABLE
+    FROM ENTIDADE
+    WHERE ENT_INATIVO = FALSE
+    AND UPPER(ENT_LOGIN) = UPPER(?)"
+
+				authorities-by-username-query="SELECT U.ENT_LOGIN AS USERNAME,
+    P.ESA_CODIGO AS AUTHORITY
+    FROM ENTIDADE U
+    JOIN ENTIDADEACESSO P
+    ON U.ENT_CODIGO = P.ENT_CODIGO
+    WHERE U.ENT_INATIVO = FALSE
+    AND UPPER (U.ENT_LOGIN)= UPPER(?)
+    " />
+
+		</authentication-provider>
+	</authentication-manager>
 </b:beans>
