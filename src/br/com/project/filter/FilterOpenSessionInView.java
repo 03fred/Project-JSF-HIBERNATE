@@ -54,7 +54,7 @@ public class FilterOpenSessionInView extends DelegatingFilterProxy implements Se
 
 		try {
 
-			request.setCharacterEncoding("UFT-8"); // DEFINE CODIFICAÇÃO
+			request.setCharacterEncoding("UTF-8"); // DEFINE CODIFICAÇÃO
 
 			// CAPTURA USUÁRIO QUE DAZ A OPERAÇÃO
 			HttpServletRequest request2 = (HttpServletRequest) request;
@@ -82,7 +82,7 @@ public class FilterOpenSessionInView extends DelegatingFilterProxy implements Se
 				sf.getCurrentSession().close();
 			}
 
-			response.setCharacterEncoding("UFT-8");
+			response.setCharacterEncoding("UTF-8");
 			response.setContentType("text/html;charset=UTF-8");
 
 		} catch (Exception e) {
