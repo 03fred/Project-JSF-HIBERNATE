@@ -4,16 +4,29 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
-	
+
 <h:head>
+
+	<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+	<title><ui:insert name="titulo">Caixaki</ui:insert></title>
+	<h:outputScript name="jquery.js" librar="primefaces/jquery" />
+	<h:outputStylesheet name="style.css" library="css" />
+	<h:outputScript name="scripty.js" library="javascript" />
 </h:head>
 
-<h:body>	
+<h:body>
+	<div id="imagemLogin">
 
-<h1>Login</h1>
+		<h:graphicImage library="img" name="logocaixaaqui.png"
+			styleClass="bordaImagem" />
+	</div>
 
+	<div id="keyslogin">
 
+		<h:graphicImage library="img" name="keys.png" styleClass="bordaImagem" />
 
-
-</h:body> 
+	</div>
+	
+	
+</h:body>
 </html>
