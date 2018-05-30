@@ -1,12 +1,18 @@
 package br.com.project.bean.view;
 
+import javax.annotation.Resource;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
+import org.primefaces.context.RequestContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import br.com.project.geral.BeanManagedViewAbstract;
+import br.com.project.geral.controller.SessionController;
+import br.com.srv.interfaces.SrvLogin;
 
 @Controller
 @Scope(value="request")
@@ -16,12 +22,36 @@ public class LoginBeanView extends BeanManagedViewAbstract{
 	private String username;
 	private String password;
 	
+	@Resource
+	private SessionController sessionController;
+	
+	@Resource
+	private SrvLogin srvLogin;
+	
 	private static final long serialVersionUID = 1L;
 
 	
-	public void invalidar(ActionEvent actionEvent) {
-		System.out.println("cheguei no invalidar");
+	public void invalidar(ActionEvent actionEvent) throws Exception{
+
+		RequestContext context = RequestContext.getCurrentInstance();
+		FacesMessage message = null;
+		boolean loggedIn = false;
 		
+		if(srvLogin.autentico(getUsername(),getPassword())){
+			sessionController.invalidateSession(getUsername());
+			loggedIn = true;
+		}else {
+			loggedIn = false;
+			message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Acesso negado","Login ou senhas incorretos");
+			
+		}
+		
+		if(message != null) {
+			
+			FacesContext.getCurrentInstance().addMessage("msg",message);
+		}
+		
+		context.addCallbackParam("loggedIn", loggedIn);
 	}
 	
 	public String getUsername() {
@@ -38,6 +68,22 @@ public class LoginBeanView extends BeanManagedViewAbstract{
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public SessionController getSessionController() {
+		return sessionController;
+	}
+
+	public void setSessionController(SessionController sessionController) {
+		this.sessionController = sessionController;
+	}
+
+	public SrvLogin getSrvLogin() {
+		return srvLogin;
+	}
+
+	public void setSrvLogin(SrvLogin srvLogin) {
+		this.srvLogin = srvLogin;
 	}
 	
 	

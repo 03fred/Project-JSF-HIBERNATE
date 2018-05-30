@@ -10,16 +10,13 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Component
-@Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
-public class JdbcTemplateImpl extends JdbcTemplate implements Serializable{
+@Transactional(propagation=Propagation.REQUIRED, rollbackFor = Exception.class)
+public class JdbcTemplateImpl extends JdbcTemplate implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
-	public  JdbcTemplateImpl(DataSource datasource) {
-		super(datasource);
-	}
 	
+	public JdbcTemplateImpl(DataSource dataSource) {
+		super(dataSource);
+	}
+
 }
-
-
-

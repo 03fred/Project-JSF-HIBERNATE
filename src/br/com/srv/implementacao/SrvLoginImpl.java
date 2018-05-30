@@ -1,6 +1,6 @@
 package br.com.srv.implementacao;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
 
 import br.com.repository.interfaces.RepositoryLogin;
 import br.com.srv.interfaces.SrvLogin;
@@ -9,7 +9,7 @@ public class SrvLoginImpl implements SrvLogin {
 
 	private static final long serialVersionUID = 1L;
 	
-	@Autowired
+@Resource
 	private RepositoryLogin repositoryLogin;
 
 	@Override

@@ -6,8 +6,9 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<title><ui:insert name="titulo">Caixaki</ui:insert></title>
+
 
 	<h:outputScript name="primefaces.js" library="primefaces" id="jsPrime" />
 
@@ -35,63 +36,69 @@
 	<h:outputScript name="scripty.js" library="javascript"
 		id="jsScriptSistema" />
 
-	<h:outputStylesheet name="style.css" library="css" id="cssStiloSistema" />
+	<h:outputStylesheet name="estilo.css" library="css"
+		id="cssStiloSistema" />
 
 </h:head>
 
+
+
 <h:form prependId="false" id="form">
-	<script type="text/javascript" charset="UTF=8">
+	<script type="text/javascript" charset="UTF-8">
 		$.noConflit(); /*Evita conflito entre as bibliotecas*/
 	</script>
 
 	<h:body>
 		<div id="msgError" class="espacoMensagem">
-			<p:growl id="msg" showDetail="false" sticky="true" redisplay="tru"
-				autoUpdate="true" life="1000" />
-
+			<p:growl id="msg" showDetail="false" sticky="true" redisplay="true"
+			autoUpdate="true" life="500"/>
 		</div>
-		<p:dialog header="Encerrar Sessão" widgetVar="dlg" resizable="false"
-			modal="true" closable="false">
+		
+		<p:dialog header="Encerrar Sessão" widgetVar="dlg"
+		resizable="false" modal="true" closable="false">
+			
 			<h:panelGrid columns="2" cellpadding="5">
-				<h:outputLabel for="username" value="Login:" />
-				<p:inputText id="username" required="true" label="username"
-					requiredMessage="informe o Login." 
-					value="#{loginBeanView.username}"/>
-
-				<h:outputLabel for="password" value="Senha:" />
-				<p:password id="password" required="true" lable="password"
-					requiredMessage="Informe a senha."
-					value="#{loginBeanView.password}" />
+				<h:outputLabel for="username" value="Login:"/>
+				<p:inputText id="username"  required="true" label="username"
+				requiredMessage="Informe o Login."
+				value="#{loginBeanView.username}"/>
+				
+				<h:outputLabel for="password" value="Senha:"/>
+				<p:password id="password" required="true" label="passsword"
+				requiredMessage="Informe a senha."
+				value="#{loginBeanView.password}"/>
 					
-					<f:facet name="footer">
-					<p:commandButton value="Encerrar" actionListener="#{loginBeanView.invalidar}"
-				update="form:msg" ajax="true" oncomplete="handleLoginRequest(xhr,status,args)"/>
-					</f:facet>
-			</h:panelGrid>
-
+				<f:facet name="footer">
+					<p:commandButton value="Encerrar" 
+					style="height:40px; width:100px;
+					background:#CDCDC1;corder: 1px solid #FFFFF;"
+		
+					actionListener="#{loginBeanView.invalidar}"
+					
+					update="form:msg" ajax="true" oncomplete="handleLoginRequest(xhr, status, args)" />
+				</f:facet>	
+			
+			</h:panelGrid>	
+			
 		</p:dialog>
-
+	
 	</h:body>
 
-	<script>
-		$(function() {
-
-			PF('dlg').show();
-		});
+<script>
+	$(function() {
+		PF('dlg').show();
+	});
+	
+	function handleLoginRequest(xhr, status, args) {
 		
-		function handleLoginRequest(xhr,status,args){
-			if(!args.loggedIn)
-				{
-				   PF('dlg').jq.effect("shake"),{times:5},100;
-				}
-			else{
-				
-				PF('dlg').hide();
-				logout('#{request.contexyPath}')
-			}
-			
-			
+		if (!args.loggedIn){
+			PF('dlg').jq.effect("shake"), {times:5}, 100;
+		}else {
+			PF('dlg').hide();
+			document.location = '#{request.contextPath}' + "/j_spring_security_logout"
 		}
-	</script>
+	}
+		
+</script>
 </h:form>
 </html>
