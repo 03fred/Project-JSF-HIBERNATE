@@ -55,13 +55,17 @@
 			<h:panelGrid columns="2" cellpadding="5">
 				<h:outputLabel for="username" value="Login:" />
 				<p:inputText id="username" required="true" label="username"
-					requiredMessage="informe o Login." />
+					requiredMessage="informe o Login." 
+					value="#{loginBeanView.username}"/>
 
 				<h:outputLabel for="password" value="Senha:" />
 				<p:password id="password" required="true" lable="password"
-					requiredMessage="Informe a senha." />
+					requiredMessage="Informe a senha."
+					value="#{loginBeanView.password}" />
+					
 					<f:facet name="footer">
-					<p:commandButton value="Encerrar" update="form:msg" ajax="true" oncomplete="handleLoginRequest(xhr,status,args)"/>
+					<p:commandButton value="Encerrar" actionListener="#{loginBeanView.invalidar}"
+				update="form:msg" ajax="true" oncomplete="handleLoginRequest(xhr,status,args)"/>
 					</f:facet>
 			</h:panelGrid>
 
