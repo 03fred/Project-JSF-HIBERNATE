@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
+import br.com.project.geral.controller.EntidadeController;
 import br.com.project.model.Entidade;
 
 @Scope(value = "session")
@@ -21,7 +22,7 @@ public class ContextoBean implements Serializable {
 
 	
 	@Autowired
-	
+   private EntidadeController entidadeController;
 	
 	
 	/*RETORNA TODAS AS INFORMAÇÕES DO USUÁRIO LOGADO
@@ -42,7 +43,7 @@ public class ContextoBean implements Serializable {
 		if(entidade == null || (entidade != null && !entidade.getEnt_login().equals(getUserPrincipal()))){
 			
 			if(getAuthentication().isAuthenticated()) {
-				
+				entidadeController.updateUltimoAcessoUser(getAuthentication().getName());
 				
 			}
 		}

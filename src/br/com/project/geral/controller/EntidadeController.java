@@ -13,6 +13,15 @@ implements InterfaceCrud<Entidade>{
 	/**
 	 * 
 	 */
+	
+	
 	private static final long serialVersionUID = 1L;
+
+	public void updateUltimoAcessoUser(String name) {
+
+	
+		
+		
+	}
 
 }
