@@ -2,6 +2,10 @@ package br.com.project.bean.view;
 
 import java.io.Serializable;
 
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,7 +17,13 @@ import br.com.project.model.Entidade;
 @Component(value = "contextoBean")
 public class ContextoBean implements Serializable {
 	private static final long serialVersionUID = 1L;
+	private static final String USER_LOGADO_SESSAO = "userLogadoSessao";
 
+	
+	@Autowired
+	
+	
+	
 	/*RETORNA TODAS AS INFORMAÇÕES DO USUÁRIO LOGADO
 	 * @RETURN AUTHENTICATION*/
 	
@@ -22,10 +32,32 @@ public class ContextoBean implements Serializable {
 		return SecurityContextHolder.getContext().getAuthentication();
 	}
 	
-	public Entidade getEntidadeLogada (){
+	public String getUserPrincipal() {
 		
-		return null;
+		return  getExternalContext().getUserPrincipal().getName();
+	}
+	public Entidade  getEntidadeLogada (){
+		Entidade entidade = (Entidade) getExternalContext().getSessionMap().get(USER_LOGADO_SESSAO);
+		
+		if(entidade == null || (entidade != null && !entidade.getEnt_login().equals(getUserPrincipal()))){
+			
+			if(getAuthentication().isAuthenticated()) {
+				
+				
+			}
+		}
+		
+		
+		
+		return entidade;
 	}
 
 
+	public ExternalContext  getExternalContext()
+	{
+		FacesContext context = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = context.getExternalContext();
+		return externalContext;
+		
+	}
 }
