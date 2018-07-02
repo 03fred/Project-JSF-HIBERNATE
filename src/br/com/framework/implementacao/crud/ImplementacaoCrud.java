@@ -181,23 +181,24 @@ public class ImplementacaoCrud<T> implements InterfaceCrud<T> {
 
 	@Override
 	public long totalRegistro(String table) throws Exception {
-     StringBuilder sql = new StringBuilder();
-     sql.append("select count(1) from").append(table);
+		StringBuilder sql = new StringBuilder();
+		sql.append("select count(1) from").append(table);
 		return jdbcTemplate.queryForLong(sql.toString());
 	}
 
 	@Override
 	public Query obterQuery(String query) throws Exception {
 		validaSessionFactory();
-		Query  queryReturn = sessionfactory.getCurrentSession().createQuery(query.toString());
-		
+		Query queryReturn = sessionfactory.getCurrentSession().createQuery(query.toString());
 
 		return queryReturn;
 	}
 
 	/**
-	 * Realiza consulta no  banco de dados iniciando  o carregamento a partir do registro passado 
-	 * no parametro -> iniciaNoRegistro e obtendo maximo de resultados
+	 * Realiza consulta no banco de dados iniciando o carregamento a partir do
+	 * registro passado no parametro -> iniciaNoRegistro e obtendo maximo de
+	 * resultados
+	 * 
 	 * @param query
 	 * @param iniciaNoRegistro
 	 * @param maximoResultado
@@ -206,12 +207,11 @@ public class ImplementacaoCrud<T> implements InterfaceCrud<T> {
 	 */
 	@Override
 	public List<T> findListByQueryDinamica(String query, int iniciaNoRegistro, int maximoResultado) throws Exception {
-     validaSessionFactory();
-     List<T> lista = new ArrayList<T>();
-     lista =  sessionfactory.getCurrentSession().createQuery(query).setFirstResult(iniciaNoRegistro).setMaxResults(maximoResultado).list();
-    		 
-     
-		
+		validaSessionFactory();
+		List<T> lista = new ArrayList<T>();
+		lista = sessionfactory.getCurrentSession().createQuery(query).setFirstResult(iniciaNoRegistro)
+				.setMaxResults(maximoResultado).list();
+
 		return lista;
 	}
 
@@ -246,9 +246,30 @@ public class ImplementacaoCrud<T> implements InterfaceCrud<T> {
 
 	public List<Object[]> getListSQLDinamicaArray(String sql) throws Exception {
 		validaSessionFactory();
+		
 		List<Object[]> lista = (List<Object[]>) sessionfactory.getCurrentSession().createSQLQuery(sql).list();
+		return lista;		
+	}
+	
+	public T findUniqueByQueryDinamica(String query) throws Exception {
+		validaSessionFactory();
+		T obj = (T) sessionfactory.getCurrentSession().createQuery(query.toString()).uniqueResult();
+		return obj;
+	}
 
-		return lista;
+	public T findInuqueByProperty(Class<T> entidade, Object valor,
+			String atributo, String condicao) throws Exception {
+		
+		validaSessionFactory();
+		
+		StringBuilder query = new StringBuilder();
+		query.append(" select entity from ").append(entidade.getSimpleName())
+				.append(" entity where entity.").append(atributo)
+				.append(" = '").append(valor).append("' ").append(condicao);
+
+		T obj = (T) this.findUniqueByQueryDinamica(query.toString());
+
+		return obj;
 	}
 
 }

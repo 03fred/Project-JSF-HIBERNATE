@@ -5,10 +5,13 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.servlet.http.HttpServletRequest;
 
 import org.primefaces.context.RequestContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import br.com.project.geral.BeanManagedViewAbstract;
 import br.com.project.geral.controller.SessionController;
@@ -30,6 +33,26 @@ public class LoginBeanView extends BeanManagedViewAbstract{
 	
 	private static final long serialVersionUID = 1L;
 
+	@RequestMapping(value="**/invalidar_session",method = RequestMethod.POST)
+	public void invalidarSessionMetodo(HttpServletRequest httpServletRequest) throws Exception {
+		String userLogadoSessao = null;
+		if(httpServletRequest.getUserPrincipal() != null) {
+			userLogadoSessao = httpServletRequest.getUserPrincipal().getName();
+			
+		}
+		
+		if(httpServletRequest.getUserPrincipal() == null || (userLogadoSessao != null && userLogadoSessao.trim().isEmpty())) {
+			userLogadoSessao = httpServletRequest.getRemoteUser();
+			
+		}
+		
+		if(userLogadoSessao != null && !userLogadoSessao.isEmpty())
+		{
+			sessionController.invalidateSession(userLogadoSessao);
+		}
+		
+		
+	}
 	
 	public void invalidar(ActionEvent actionEvent) throws Exception{
 

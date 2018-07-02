@@ -2,8 +2,11 @@ package br.com.srv.implementacao;
 
 import java.util.Date;
 
+import org.springframework.stereotype.Service;
+
 import br.com.srv.interfaces.SrvEntidade;
 
+@Service
 public class SrvEntidadeImpl implements SrvEntidade {
 
 	/**
