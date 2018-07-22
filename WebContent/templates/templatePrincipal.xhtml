@@ -41,7 +41,10 @@
 		<h:body>
 
 			<script type="text/javascript" charset="UTF-8">
-				$.noConflit();
+				$.noConflict();
+				localeData_pt_br();
+				initTamplete();
+				ocultarMenu();
 
 				/*Bloqueia f5 do teclado*/
 
@@ -56,70 +59,112 @@
 
 			<ui:include src="/templates/barraProgresso.xhtml" />
 			<div id="msgError">
-			
-			<p:growl id="msg" showDetail="false"
-			 sticky="true"  redisplay="true" autoUpdate="true"
-			 life="5000"/>
-			
-			<p:tooltip id="toolTipFocus" globalSelector="a,:input,:button"
-			showEvent="focus" hideEvent="blur"/>
-			
+
+				<p:growl id="msg" showDetail="false" sticky="true" redisplay="true"
+					autoUpdate="true" life="5000" />
+
+				<p:tooltip id="toolTipFocus" globalSelector="a,:input,:button"
+					showEvent="focus" hideEvent="blur" />
+
 			</div>
-			
+
 			<div id="container">
-			
-			<div id="topo">
-			<span style="position: absolute;left: 20px;  top:14px" id="spanlogo">
-			
-			<h:graphicImage library="img" name="logo.png" id="logoImg" styleClass="bordaImagem"/>
-			
-			</span>
-			<span id="dadoslogin"> Usuário: #{entidadeBeanView.usuarioLogadoSecurity}
-			<br id="quebraUser"/>
-		   
-		  Último acesso :
-		    <h:outputLabel value="#{entidadeBeanView.ultimoAcesso}"
- 				  	  id="saidaUltimoAcesso">					  	 	
- 		   </h:outputLabel>
-		    
-		    <br id="quebraUltimoAcesso"/>
-		    
-		    <a href="#" onclick="javascript:logout('#{request.contextPath}')">Sair</a>
-		
-			</span>
-				
-			<span id="menuSistema" style="position:absolute; right:25px; top:48px; width:20px;">
-			<a href="#" >
-			<h:graphicImage library="img" name="setabaixo.png" styleClass="bordaimagem" id="imaSetaBaixo"/>
-			
-			</a>						
-			</span>
-			
-			
-			</div>
-			
-			<div id="menu">
-			
-			<span id="iniciarmenu">
-			
-			<h:graphicImage library="img" name="iconemenu.png"
-			 styleClass="bordaimagem" id="iconemenu"> 
+
+				<div id="topo">
+					<span style="position: absolute; left: 20px; top: 14px"
+						id="spanlogo"> <h:graphicImage library="img"
+							name="logo.png" id="logoImg" styleClass="bordaImagem" />
+
+					</span> <span id="dadoslogin"> Usuário:
+						#{entidadeBeanView.usuarioLogadoSecurity} <br id="quebraUser" />
+
+						Último acesso : <h:outputLabel
+							value="#{entidadeBeanView.ultimoAcesso}" id="saidaUltimoAcesso">
+						</h:outputLabel> <br id="quebraUltimoAcesso" /> <a href="#"
+						onclick="javascript:logout('#{request.contextPath}')">Sair</a>
+
+					</span> <span id="menuSistema"
+						style="position: absolute; right: 25px; top: 48px; width: 20px;">
+						<a href="#" onclick="abrirMenupop();"> <h:graphicImage
+								library="img" name="setabaixo.png" styleClass="bordaimagem"
+								id="imaSetaBaixo" />
+
+					</a>
+					</span>
+
+
+				</div>
+
+				<div id="menu">
+
+					<span id="iniciarmenu"> <h:graphicImage library="img"
+							name="iconemenu.png" styleClass="bordaimagem" id="iconemenu"> 
 			Menu
 			</h:graphicImage>
+
+					</span>
+				</div>
+
+				<div id="corpo" class="corpo">
+					<ui:insert name="corpo" />
+				</div>
+
+				<div id="menupop">
+
+						<sec:ifAnyGranted roles="MENSAGENS_ENVIAR_ACESSAR, ADMIN">
+ 					 	<p:commandLink actionListener="#{mensagemBeanView.novo}"
+ 					 	onsuccess="enviarMsgDialog.show();"
+ 					 	value="Enviar mensagem" immediate="true" style="display:block;" 
+ 					 	id="enviarMensagem" ajax="true" process="@this">
+ 					 	   <p:ajax immediate="true" listener="#{mensagemBeanView.novo}"/>
+ 					 	</p:commandLink>
+ 					 </sec:ifAnyGranted>
+ 					 
+ 					 
+					<a href="#" onclick="alterarSenhaDialog.show();"
+						style="display: block;" id="alterarSenha"> <span
+						style="display: block;" id="spanAlterarSenha">Alterar Senha</span>
+					</a>
+
+				</div>
+				
+				<div id="barramenu">				
 			
-			</span>
+				<p:tieredMenu id="menuEsquerdo" style="width:185px; border:none;
+				background:none; color:#000;">
+				
+				  <p:menuitem value="Início" id="menuinicio"
+ 						    onclick="redirecionarPagina('#{request.contextPath}', '/restrito/principal');"
+ 						    ajax="true" />
+ 											<p:menuitem onclick="javascript:logout('#{request.contextPath}');"
+								value="Sair" id="menusair" ajax="true" />
+				
+				
+				</p:tieredMenu>
+		
+				</div>
+
 			</div>
+
+
+ 			<p:dialog widgetVar="enviarMsgDialog" id="alterarMsgDialog" width="800"
+				modal="true" resizable="false" height="360"
+				header="Enviar menssagem" appendToBody="false" dynamic="true">
+			</p:dialog>
 			
-			<div id="corpo" class="corpo">
-			<ui:insert name="corpo"/>
-			
-			</div>
-			
-			
-			</div>
+			<p:dialog widgetVar="alterarSenhaDialog" id="alterarSenhaDialog"
+				width="240" modal="true" resizable="false" height="170"
+				header="Alterar Senha" dynamic="true" appendToBody="false">
+			</p:dialog>
+		
 		</h:body>
 
 	</h:form>
 
+<script type="text/javascript" charset="UTF-8">
+carregarIdElementosPagina();
+
+
+</script>
 </sec:isAuthenticated>
 </html>
