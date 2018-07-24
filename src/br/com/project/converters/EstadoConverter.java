@@ -7,28 +7,24 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-import org.hibernate.Hibernate;
-
 import br.com.framework.hibernate.session.HibernateUtil;
 import br.com.project.model.Estado;
 
 @FacesConverter(forClass =  Estado.class)
 public class EstadoConverter implements Converter,Serializable{
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 
 	@Override
 	public Object getAsObject(FacesContext arg0, UIComponent arg1, String codigo) {
        if(codigo != null && !codigo.isEmpty()) {
-    	   
+   		return (Estado) HibernateUtil.getCurrentSession().get(Estado.class, new Long(codigo));
+
     	   
        }
 		
-		
-		return (Estado) HibernateUtil.getCurrentSession().get(Estado.class, new Long(codigo));
+		return codigo;
 	}
 
 	@Override
@@ -36,6 +32,7 @@ public class EstadoConverter implements Converter,Serializable{
 		
 		if(objeto != null) {
 			Estado c =(Estado) objeto;		
+			return c.getEst_id() != null && c.getEst_id() > 0 ? c.getEst_id().toString() :null;
 		}
 		return null;
 	}

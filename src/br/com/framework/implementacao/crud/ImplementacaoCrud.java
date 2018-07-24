@@ -85,7 +85,8 @@ public class ImplementacaoCrud<T> implements InterfaceCrud<T> {
 	public List<T> findList(Class<T> entidade) throws Exception {
 		validaSessionFactory();
 		StringBuilder query = new StringBuilder();
-		query.append("select distinct(entity) from ").append(entidade.getSimpleName()).append("entity");
+		query.append(" select distinct(entity) from ").append(entidade.getSimpleName()).append(" entity ");
+
 		List<T> lista = sessionfactory.getCurrentSession().createQuery(query.toString()).list();
 		return lista;
 	}
@@ -163,19 +164,16 @@ public class ImplementacaoCrud<T> implements InterfaceCrud<T> {
 
 	@Override
 	public JdbcTemplate getJdbcTemplate() {
-		// TODO Auto-generated method stub
 		return jdbcTemplate;
 	}
 
 	@Override
 	public SimpleJdbcTemplate getSimplejdbcTemplate() {
-		// TODO Auto-generated method stub
 		return simpleJdbcTemplate;
 	}
 
 	@Override
 	public SimpleJdbcInsert getSimplejdbcInsert() {
-		// TODO Auto-generated method stub
 		return simpleJdbcInsert;
 	}
 
