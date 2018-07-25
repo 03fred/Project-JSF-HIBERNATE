@@ -101,29 +101,29 @@ function localeData_pt_br() {
 	PrimeFaces.locales['pt'] = {
 		closeText : 'Fechar',
 		prevText : 'Anterior',
-		nextText : 'Próximo',
-		currentText : 'Começo',
+		nextText : 'PrÃ³ximoo',
+		currentText : 'ComeÃ§o',
 		monthNames : [ 'Janeiro', 'Fevereiro', 'Marcio', 'Abril', 'Maio',
 				'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro',
 				'Dezembro' ],
 		monthNamesShort : [ 'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul',
 				'Ago', 'Set', 'Out', 'Nov', 'Dez' ],
-		dayNames : [ 'Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta',
-				'Sexta', 'Sábado' ],
-		dayNamesShort : [ 'Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb' ],
+		dayNames : [ 'Domingo', 'Segunda', 'TerÃ§a', 'Quarta', 'Quinta',
+				'Sexta', 'Sâ£¡do' ],
+		dayNamesShort : [ 'Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sb' ],
 		dayNamesMin : [ 'D', 'S', 'T', 'Q', 'Q', 'S', 'S' ],
 		weekHeader : 'Semana',
 		firstDay : 0,
 		isRTL : false,
 		showMonthAfterYear : false,
 		yearSuffix : '',
-		timeOnlyTitle : 'São Horas',
+		timeOnlyTitle : 'Sä¯ Horas',
 		timeText : 'Tempo',
 		hourText : 'Hora',
 		minuteText : 'Minuto',
 		secondText : 'Segundo',
 		ampm : false,
-		month : 'Mês',
+		month : 'MÃªs',
 		week : 'Semana',
 		day : 'Dia',
 		allDayText : 'Todo o Dia'
@@ -153,4 +153,43 @@ function ocultarMenu() {
 	  	$('#barramenu').hide();
 	  });
 	}
+
+
+function addFocoCampo(campo) {
+	var id = getValorElementPorId(campo);
+	if (id != undefined){
+		document.getElementById(getValorElementPorId(id)).focus();
+	}
+}
+
+function gerenciaTeclaEnter() {
+	
+	$(document).ready(function() {
+		$('input').keypress(function(e) {
+			var code = null;
+			code = (e.keyCode ? e.keyCode : e.which);
+			return (code === 13) ? false : true;
+
+		});
+
+		$('input[type=text]').keydown(function(e) {
+			// Obter o pró¸©­o î¯¤ice do elemento de entrada de texto
+			var next_idx = $('input[type=text]').index(this) + 1;
+
+			// Obter o nò­¥²o de elemento de entrada de texto em um documento html
+			var tot_idx = $('body').find('input[type=text]').length;
+
+			// Entra na tecla no có¤©§o ASCII
+			if (e.keyCode === 13) {
+				if (tot_idx === next_idx)
+					// Vá¡°ara o primeiro elemento de texto
+					$('input[type=text]:eq(0)').focus();
+				else
+					// Vá¡°ara o elemento de entrada de texto seguinte
+					$('input[type=text]:eq(' + next_idx + ')').focus();
+			}
+		});
+	});
+	
+}
 
