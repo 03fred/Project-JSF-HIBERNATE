@@ -23,13 +23,11 @@ public String novo() throws Exception {
 
 @Override
 protected Class<?> getClassImplement() {
-	// TODO Auto-generated method stub
 	return null;
 }
 
 @Override
 protected InterfaceCrud<?> getController() {
-	// TODO Auto-generated method stub
 	return null;
 }
 	
