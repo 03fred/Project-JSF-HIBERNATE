@@ -12,6 +12,10 @@
 
 	<ui:define name="corpo">
 
+<h:commandLink immediate="true">
+<p:fileDownload value="#{cidadeBeanView.arquivoReport}"/>
+<h:graphicImage library="img" name="pdf.png"/>
+</h:commandLink>
 		<h:form id="formCadastro" propendId="false">
 			<c:set var="isCadastro" value="true" scope="view" />
 			<p:panel header="Cadastro de cidade" id="panelaCadastro">
@@ -38,16 +42,16 @@
 				</h:panelGrid>
 			</p:panel>
 			<div class="espacoBranco" />
-			
-			<util:botoesCrud  managedBeanView ="#{cidadeBeanView}"
-			camposReload=":formTemplate:msg, tableResult"
-			botaoNovo="#{contextoBean.possuiAcesso('CIDADE_NOVO', 'ADMIN')}"
-			botaoSalvar="#{contextoBean.possuiAcesso('CIDADE_NOVO', 'ADMIN') and cidadeBeanView.objetoSelecionado.cid_codigo == null}"
-			botaoAtualizar="#{contextoBean.possuiAcesso('CIDADE_EDITAR', 'ADMIN') and cidadeBeanView.objetoSelecionado.cid_codigo != null}"
-			botaoExcluir="#{contextoBean.possuiAcesso('CIDADE_NOVO', 'ADMIN')}">
-			
+
+			<util:botoesCrud managedBeanView="#{cidadeBeanView}"
+				camposReload=":formTemplate:msg, tableResult"
+				botaoNovo="#{contextoBean.possuiAcesso('CIDADE_NOVO', 'ADMIN')}"
+				botaoSalvar="#{contextoBean.possuiAcesso('CIDADE_NOVO', 'ADMIN') and cidadeBeanView.objetoSelecionado.cid_codigo == null}"
+				botaoAtualizar="#{contextoBean.possuiAcesso('CIDADE_EDITAR', 'ADMIN') and cidadeBeanView.objetoSelecionado.cid_codigo != null}"
+				botaoExcluir="#{contextoBean.possuiAcesso('CIDADE_NOVO', 'ADMIN')}">
+
 			</util:botoesCrud>
-			
+
 		</h:form>
 		<script type="text/javascript" charset="UTF-8">
 			addFocoCampo("cidadeNome");
@@ -62,7 +66,7 @@
 			{PreviousPageLink} {PageLinks} {NextPageLink}
 			{LastPageLink} {RowsPerPageDropdown}">
 
-<ui:include src="/resources/components/colunasDatatableCidade.xhtml"/>
+			<ui:include src="/resources/components/colunasDatatableCidade.xhtml" />
 		</p:dataTable>
 
 	</ui:define>

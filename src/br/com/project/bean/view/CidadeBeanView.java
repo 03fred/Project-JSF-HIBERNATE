@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 
+import org.primefaces.model.StreamedContent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -77,6 +78,7 @@ public class CidadeBeanView extends BeanManagedViewAbstract {
 		sucesso();
 	}
 
+	
 	@Override
 	public void saveEdit() throws Exception {
 
@@ -92,7 +94,13 @@ public class CidadeBeanView extends BeanManagedViewAbstract {
 		sucesso();
 
 	}
+@Override
+public StreamedContent getArquivoReport() throws Exception {
 
+	System.out.println("a");
+	return super.getArquivoReport();
+}
+	
 	public List<Cidade> getList() {
 		try {
 			list = cidadeController.findList(getClassImplement());
