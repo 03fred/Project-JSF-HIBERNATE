@@ -8,7 +8,7 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
 import br.com.framework.hibernate.session.HibernateUtil;
-import br.com.project.model.Estado;
+import br.com.project.model.classes.Estado;
 
 @FacesConverter(forClass =  Estado.class)
 public class EstadoConverter implements Converter,Serializable{

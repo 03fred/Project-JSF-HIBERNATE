@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 import br.com.project.geral.controller.EntidadeController;
 import br.com.project.geral.controller.SessionController;
-import br.com.project.model.Entidade;
+import br.com.project.model.classes.Entidade;
 
 @Scope(value = "session")
 @Component(value = "contextoBean")

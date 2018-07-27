@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 
 import br.com.framework.implementacao.crud.ImplementacaoCrud;
 import br.com.framework.interfac.crud.InterfaceCrud;
-import br.com.project.model.Estado;
+import br.com.project.model.classes.Estado;
 
 @Controller
 

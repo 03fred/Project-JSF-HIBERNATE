@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 
 import br.com.framework.implementacao.crud.ImplementacaoCrud;
 import br.com.framework.interfac.crud.InterfaceCrud;
-import br.com.project.model.Entidade;
+import br.com.project.model.classes.Entidade;
 import br.com.srv.interfaces.SrvEntidade;
 
 @Controller

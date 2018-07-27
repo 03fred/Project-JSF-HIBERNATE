@@ -12,7 +12,7 @@ import org.springframework.stereotype.Controller;
 import br.com.framework.interfac.crud.InterfaceCrud;
 import br.com.project.geral.BeanManagedViewAbstract;
 import br.com.project.geral.controller.EstadoController;
-import br.com.project.model.Estado;
+import br.com.project.model.classes.Estado;
 @Controller
 @Scope(value = "session")
 @ManagedBean(name = "estadoBeanView")

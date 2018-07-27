@@ -14,7 +14,7 @@ import org.springframework.stereotype.Controller;
 import br.com.framework.interfac.crud.InterfaceCrud;
 import br.com.project.geral.BeanManagedViewAbstract;
 import br.com.project.geral.controller.CidadeController;
-import br.com.project.model.Cidade;
+import br.com.project.model.classes.Cidade;
 
 @Controller
 @Scope(value = "session")
@@ -59,6 +59,8 @@ public class CidadeBeanView extends BeanManagedViewAbstract {
 		list.clear();
 		return url;
 	}
+	
+	
 
 	public Cidade getObjetoSelecionado() {
 		return objetoSelecionado;
@@ -96,8 +98,9 @@ public class CidadeBeanView extends BeanManagedViewAbstract {
 	}
 @Override
 public StreamedContent getArquivoReport() throws Exception {
-
-	System.out.println("a");
+super.setNomeRelatorioJasper("report_cidade");
+super.setNomeRelatorioSaida("report_cidade");
+super.setListDataBeanCollectionReport(cidadeController.findList(getClassImplement()));
 	return super.getArquivoReport();
 }
 	

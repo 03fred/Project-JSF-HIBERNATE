@@ -23,7 +23,7 @@ import org.springframework.web.filter.DelegatingFilterProxy;
 import br.com.framework.hibernate.session.HibernateUtil;
 import br.com.framework.utils.UtilFramework;
 import br.com.project.listener.ContextLoaderListenerCaixakiUtils;
-import br.com.project.model.Entidade;
+import br.com.project.model.classes.Entidade;
 
 @WebFilter(filterName = "conexaoFilter")
 public class FilterOpenSessionInView extends DelegatingFilterProxy implements Serializable {
