@@ -25,7 +25,7 @@ public class CidadeBeanView extends BeanManagedViewAbstract {
 	private static final long serialVersionUID = 1L;
 	private String url = "/cadastro/cad_cidade.jsf?faces-redirect=true";
 	private Cidade objetoSelecionado = new Cidade();
-	private String urlFind = "/cadastro/find_cidade.jsf?faces= true";
+	private String urlFind = "/cadastro/find_cidade.jsf?faces-redirect=true";
 
 	@Override
 	public String save() throws Exception {
@@ -132,6 +132,7 @@ return urlFind;
 
 		return cidadeController;
 	}
+
 	
 	
 }

@@ -1,0 +1,38 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags"
+	xmlns:util="http://java.sun.com/jsf/composite/components"
+	xmlns:comp="http://java.sun.com/jsf/composite"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:form id="formPesquisa" prependId="false">
+	<comp:interface displayName="interfacePesquisa"
+		name="interfacePesquisa">
+		<comp:attribute name="managedBeanView" required="true" />
+		<comp:attribute name="ocultaNovo" required="true" />
+		<comp:attribute name="menuImpressao" required="false" default="false" />
+	</comp:interface>
+	<comp:implementation>
+		<c:set var="isCadastro" value="false" scope="view" />
+
+		<h:panelGrid columns="2">
+			<h:column rendered="#{cc.attrs.ocultaNovo}">
+				<p:commandButton value="Novo" id="buttonNovoRegistro" ajax="false"
+					immediate="true" action="#{cc.attrs.managedBeanView.novo}"></p:commandButton>
+			</h:column>
+			
+			<h:column rendered="#{cc.attrs.menuImpressao}">
+				<util:menuImpressao bean="#{cc.attrs.managedBeanView}">
+				</util:menuImpressao>
+			</h:column>
+
+
+		</h:panelGrid>
+	</comp:implementation>
+
+</h:form>
+</html>

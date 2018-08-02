@@ -13,29 +13,31 @@
 </comp:interface>
 
 <comp:implementation>
-<h:commandLink immediate="true">
-<f:setPropertyActionListener value="1" target="#{cc.attrs.bean.tipoRelatorio}"/>
-<p:fileDownload value="#{cc.attrs.bean..arquivoReport}"/>
-<h:graphicImage library="img" name="pdf.png"/>
-</h:commandLink>
 
-<h:commandLink immediate="true">
-<f:setPropertyActionListener value="2" target="#{cc.attrs.bean.tipoRelatorio}"/>
-<p:fileDownload value="#{cc.attrs.bean.arquivoReport}"/>
-<h:graphicImage library="img" name="excel.png"/>
-</h:commandLink>
-
-<h:commandLink immediate="true">
-<f:setPropertyActionListener value="3" target="#{cc.attrs.bean.tipoRelatorio}"/>
-<p:fileDownload value="#{cc.attrs.bean.arquivoReport}"/>
-<h:graphicImage library="img" name="html.png"/>
-</h:commandLink>
-
-<h:commandLink immediate="true">
-<f:setPropertyActionListener value="4" target="#{cc.attrs.bean.tipoRelatorio}"/>
-<p:fileDownload value="#{cc.attrs.bean.arquivoReport}"/>
-<h:graphicImage library="img" name="ods.png"/>
-</h:commandLink>
+			<h:commandLink immediate="true">
+			    <f:setPropertyActionListener target="#{cidadeBeanView.tipoRelatorio}" value="1"/>
+				<p:fileDownload  value="#{cidadeBeanView.arquivoReport}"/>
+				<h:graphicImage library="img" name="pdf.png"/>
+			</h:commandLink>
+			
+			<h:commandLink immediate="true">
+			    <f:setPropertyActionListener target="#{cidadeBeanView.tipoRelatorio}" value="2"/>
+				<p:fileDownload  value="#{cidadeBeanView.arquivoReport}"/>
+				<h:graphicImage library="img" name="excel.png"/>
+			</h:commandLink>
+			
+			<h:commandLink immediate="true">
+			    <f:setPropertyActionListener target="#{cidadeBeanView.tipoRelatorio}" value="3"/>
+				<p:fileDownload  value="#{cidadeBeanView.arquivoReport}"/>
+				<h:graphicImage library="img" name="html.png"/>
+			</h:commandLink>
+			
+			<h:commandLink immediate="true">
+			    <f:setPropertyActionListener target="#{cidadeBeanView.tipoRelatorio}" value="4"/>
+				<p:fileDownload  value="#{cidadeBeanView.arquivoReport}"/>
+				<h:graphicImage library="img" name="ods.png"/>
+			</h:commandLink>
+			
 
 </comp:implementation>
 
