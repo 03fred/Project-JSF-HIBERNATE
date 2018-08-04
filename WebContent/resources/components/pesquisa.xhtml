@@ -15,6 +15,7 @@
 		<comp:attribute name="managedBeanView" required="true" />
 		<comp:attribute name="ocultaNovo" required="true" />
 		<comp:attribute name="menuImpressao" required="false" default="false" />
+		<comp:attribute name="nomePesquisa" required="true" />
 	</comp:interface>
 	<comp:implementation>
 		<c:set var="isCadastro" value="false" scope="view" />
@@ -24,14 +25,82 @@
 				<p:commandButton value="Novo" id="buttonNovoRegistro" ajax="false"
 					immediate="true" action="#{cc.attrs.managedBeanView.novo}"></p:commandButton>
 			</h:column>
-			
+
 			<h:column rendered="#{cc.attrs.menuImpressao}">
 				<util:menuImpressao bean="#{cc.attrs.managedBeanView}">
 				</util:menuImpressao>
 			</h:column>
-
-
 		</h:panelGrid>
+		<p:spacer height="20px">
+
+		</p:spacer>
+
+		<p:panel id="panelPesquisa" header="#{cc.attrs.nomePesquisa}">
+			<h:panelGrid id="panelGridPesquisa" columns="7">
+
+				<h:outputLabel for="campo" id="labelCampo" value="Campo:" />
+				<p:selectOneMenu style="width:150px;" id="campo" onchange="addMascaraPesquisa(this.value);"
+					value="#{cc.attrs.managedBeanView.objetoCampoConsultaSelecionado}">
+
+					<f:selectItems var="campoPesquisaSelecionado"
+						id="itensCampoPesquisa"
+						itemLabel="#{campoPesquisaSelecionado.descricao}"
+						itemValue="#{campoPesquisaSelecionado.tipoClass}"
+						value="#{cc.attrs.managedBeanView.listaCampoPesquisa}">
+
+
+					</f:selectItems>
+
+				</p:selectOneMenu>
+				<h:outputLabel for="condicao" id="labelCondicao" value="Onde :" />
+				<p:selectOneMenu id="condicao" style="width:150px;"
+					value="#{cc.attrs.managedBeanView.condicaoPesquisaSelecionado}">
+					<f:selectItems id="itensCondicao"
+						value="#{cc.attrs.managedBeanView.listaCondicaoPesquisa}">
+					</f:selectItems>
+				</p:selectOneMenu>
+				
+				<p:inputText id="valorPesquisa" immediate="false" 
+				value="#{cc.attrs.managedBeanView.valorPesquisa}"/>
+				
+				
+				<p:commandButton id="buttonPesquisar" value="Filtrar" ajax="true"
+					actionListener="#{cc.attrs.managedBeanView.consultarEntidade}"
+					process="@this,panelGridPesquisa">
+
+				</p:commandButton>
+			</h:panelGrid>
+
+		</p:panel>
+		
+		<script type="text/javascript" charset="UTF-8">   
+	
+		var idCampo = getValorElementPorIdJQuery('campo');
+		var idCampoCondicao = getValorElementPorIdJQuery('condicao');
+		var idPesquisa = getValorElementPorIdJQuery('valorPesquisa');
+		
+		$(idPesquisa).keypress(permitNumber);
+		
+		$(idCampo + ' :nth-child(1)').prop('selected', true);
+		$(idCampoCondicao + ' :nth-child(1)').prop('selected', true);
+		$(idPesquisa).val('');
+		
+		addMascaraPesquisa($(idCampo).val()); 
+		
+		addFocoAoCampo('valorPesquisa');
+		A
+		//chama o pesquisar ao dar enter na pesquisa
+		function executaPesquisaComEnter(event, button){
+			if (event.keyCode == 13){
+				event.preventDefault();    
+				addFocoAoCampo('buttonPesquisar');
+				
+				var buttonPesquisar = getValorElementPorIdJQuery('buttonPesquisar');
+				$(buttonPesquisar).click();
+			}
+		}
+		
+	</script>
 	</comp:implementation>
 
 </h:form>

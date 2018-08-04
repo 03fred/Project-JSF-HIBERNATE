@@ -134,5 +134,8 @@ return urlFind;
 	}
 
 	
-	
+	@Override
+	public void consultarEntidade() throws Exception {
+		super.consultarEntidade();
+	}
 }

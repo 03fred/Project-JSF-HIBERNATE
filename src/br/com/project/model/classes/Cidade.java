@@ -31,13 +31,13 @@ public class Cidade implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	
-	@IdentificaCampoPesquisa(descricaoCampo = "Código", campoConsulta = "cid_codigo")
+	@IdentificaCampoPesquisa(descricaoCampo = "Código", campoConsulta = "cid_codigo", principarl = 1)
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cidade_seq")
 	private Long cid_codigo;
 	
 	
-	@IdentificaCampoPesquisa(descricaoCampo = "Descrição", campoConsulta = "cid_descricao", principarl = 1)
+	@IdentificaCampoPesquisa(descricaoCampo = "Descrição", campoConsulta = "cid_descricao", principarl = 2)
 	@Column(length = 100, nullable = false)
 	private String cid_descricao;
 	
