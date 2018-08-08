@@ -1,4 +1,3 @@
-
 package br.com.project.bean.view;
 
 import java.util.ArrayList;
@@ -137,5 +136,10 @@ return urlFind;
 	@Override
 	public void consultarEntidade() throws Exception {
 		super.consultarEntidade();
+	}
+
+	@Override
+	public String condicaoAndParaPesquisa() throws Exception {
+		return " ";
 	}
 }

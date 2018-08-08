@@ -1,5 +1,6 @@
 package br.com.project.geral;
 
+
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,6 +9,7 @@ import java.util.List;
 
 import javax.faces.model.SelectItem;
 
+import org.hibernate.Query;
 import org.springframework.stereotype.Component;
 
 import br.com.framework.interfac.crud.InterfaceCrud;
@@ -20,6 +22,8 @@ import br.com.project.util.all.UtilitariaRegex;
 public abstract class BeanManagedViewAbstract extends BeanReportView {
 
 	private static final long serialVersionUID = 1L;
+	
+	public abstract String condicaoAndParaPesquisa() throws Exception;
 
 	protected abstract Class<?> getClassImplement();
 
@@ -128,4 +132,59 @@ public abstract class BeanManagedViewAbstract extends BeanReportView {
 	public CondicaoPesquisa getCondicaoPesquisaSelecionado() {
 		return condicaoPesquisaSelecionado;
 	}
+	
+	protected String getSqlLazyQuery() throws Exception {
+		StringBuilder sql = new StringBuilder();
+		sql.append(" select entity from ");
+		sql.append(getQueryConsulta());
+		sql.append(" order by entity.");
+		sql.append(objetoCampoConsultaSelecionado.getCampoBanco());
+		return sql.toString();
+	}
+
+	protected int totalRegistroConsulta() throws Exception {
+		Query query = getController().obterQuery(" select count(entity) from " + getQueryConsulta());
+		Number result = (Number) query.uniqueResult();
+		return result.intValue();
+	}
+
+	/*
+	 * Retorna Query para consulta
+	 */
+	private StringBuilder getQueryConsulta() throws Exception {
+		valorPesquisa = new  UtilitariaRegex().retiraAcentos(valorPesquisa);
+		StringBuilder sql = new StringBuilder();
+		sql.append(getClassImplement().getSimpleName());
+		sql.append(" entity where ");
+
+		sql.append(" retira_acentos(upper(cast(entity.");
+		sql.append(objetoCampoConsultaSelecionado.getCampoBanco());
+		sql.append(" as text))) ");
+
+		if (condicaoPesquisaSelecionado.name().equals(
+				CondicaoPesquisa.IGUAL_A.name())) {
+			sql.append(" = retira_acentos(upper('");
+			sql.append(valorPesquisa);
+			sql.append("'))");
+		} else if (condicaoPesquisaSelecionado.name().equals(
+				CondicaoPesquisa.CONTEM.name())) {
+			sql.append(" like retira_acentos(upper('%");
+			sql.append(valorPesquisa);
+			sql.append("%'))");
+		} else if (condicaoPesquisaSelecionado.name().equals(
+				CondicaoPesquisa.INICIA.name())) {
+			sql.append(" like retira_acentos(upper('");
+			sql.append(valorPesquisa);
+			sql.append("%'))");
+		} else if (condicaoPesquisaSelecionado.name().equals(
+				CondicaoPesquisa.TERMINA_COM.name())) {
+			sql.append(" like retira_acentos(upper('%");
+			sql.append(valorPesquisa);
+			sql.append("'))");
+		}
+		sql.append(" ");
+		return sql;
+	}
+
+	
 }

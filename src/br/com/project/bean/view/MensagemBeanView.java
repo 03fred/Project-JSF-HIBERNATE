@@ -30,6 +30,12 @@ protected Class<?> getClassImplement() {
 protected InterfaceCrud<?> getController() {
 	return null;
 }
+
+@Override
+public String condicaoAndParaPesquisa() throws Exception {
+	// TODO Auto-generated method stub
+	return null;
+}
 	
 	
 }

@@ -16,6 +16,7 @@
 		<comp:attribute name="ocultaNovo" required="true" />
 		<comp:attribute name="menuImpressao" required="false" default="false" />
 		<comp:attribute name="nomePesquisa" required="true" />
+		<comp:attribute name="colunasGridDataTableList" required="true"/>
 	</comp:interface>
 	<comp:implementation>
 		<c:set var="isCadastro" value="false" scope="view" />
@@ -66,14 +67,34 @@
 				
 				<p:commandButton id="buttonPesquisar" value="Filtrar" ajax="true"
 					actionListener="#{cc.attrs.managedBeanView.consultarEntidade}"
-					process="@this,panelGridPesquisa">
+					process="@this,panelGridPesquisa"
+					oncomplete="addFocoAoCampo('valorPesquisa');"
+					onsucess="addFocoAoCampo('valorPesquisa');"
+					update=":formTemplate:msg, tableResult">
 
 				</p:commandButton>
 			</h:panelGrid>
-
 		</p:panel>
+		<p:spacer/>
 		
-		<script type="text/javascript" charset="UTF-8">   
+		<p:dataTable id="tableResult" rendered="true" 
+			    value="#{cc.attrs.managedBeanView.list}"
+				var="objeto" 
+				rows="10" 
+				widgetVar="tableResult"
+				paginatorPosition="bottom" 
+				lazy="true"
+				rowIndexVar="index"
+				paginator="true" 
+				emptyMessage="Não existem valores para exibição."
+				paginatorTemplate=" {FirstPageLink}
+								   {PreviousPageLink} {PageLinks} 
+	 							   {NextPageLink} {LastPageLink} {RowsPerPageDropdown} ">
+	 							   
+		<ui:include src="/resources/components/colunasDataTableCidade.xhtml"/>
+		
+		</p:dataTable>
+		<!--  <script type="text/javascript" charset="UTF-8">   
 	
 		var idCampo = getValorElementPorIdJQuery('campo');
 		var idCampoCondicao = getValorElementPorIdJQuery('condicao');
@@ -100,7 +121,7 @@
 			}
 		}
 		
-	</script>
+	</script> -->
 	</comp:implementation>
 
 </h:form>

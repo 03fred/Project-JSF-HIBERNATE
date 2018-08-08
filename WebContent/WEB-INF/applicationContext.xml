@@ -52,6 +52,7 @@
 		<property name="validateOnMigrate" value="true" />
 	</bean>
 
+<bean id="controller" name="controller" class="br.com.framework.controller.crud.Controller"/>
 
 	<bean id="transactionManager" name="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
