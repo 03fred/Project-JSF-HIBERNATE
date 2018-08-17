@@ -142,6 +142,7 @@
 									<p:menuitem value="Cidade" id="menuCidade" immediate="true"
 										action="#{cidadeBeanView.redirecionarFindEntidade}">
 
+
 									</p:menuitem>
 								</sec:ifAnyGranted>
 							</p:submenu>
@@ -171,6 +172,8 @@
 			<p:dialog widgetVar="alterarSenhaDialog" id="alterarSenhaDialog"
 				width="240" modal="true" resizable="false" height="170"
 				header="Alterar Senha" dynamic="true" appendToBody="false">
+			<ui:include src="/cadastro/dialog_alterar_senha.xhtml"/>
+			
 			</p:dialog>
 
 		</h:body>

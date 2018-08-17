@@ -95,7 +95,7 @@ public class ImplementacaoCrud<T> implements InterfaceCrud<T> {
 	public Object findById(Class<T> entidade, long id) throws Exception {
 		validaSessionFactory();
 
-		Object obj = sessionfactory.getCurrentSession().get(getClass(), id);
+		Object obj = sessionfactory.getCurrentSession().get(entidade, id);
 
 		return obj;
 	}
@@ -104,7 +104,7 @@ public class ImplementacaoCrud<T> implements InterfaceCrud<T> {
 	public T findByporId(Class<T> entidade, long id) throws Exception {
 		validaSessionFactory();
 
-		T obj = (T) sessionfactory.getCurrentSession().get(getClass(), id);
+		T obj = (T) sessionfactory.getCurrentSession().load(entidade, id);
 
 		return obj;
 	}
