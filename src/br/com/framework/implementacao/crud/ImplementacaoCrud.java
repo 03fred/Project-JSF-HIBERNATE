@@ -269,5 +269,6 @@ public class ImplementacaoCrud<T> implements InterfaceCrud<T> {
 
 		return obj;
 	}
+	
 
 }

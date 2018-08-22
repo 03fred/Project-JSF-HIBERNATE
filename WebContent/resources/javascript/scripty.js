@@ -612,11 +612,11 @@ function pesquisarUserDestinoPerderFocoDialog(id) {
 	if (id.trim() != '') {
 	 statusDialog.show();
 	 $("#loginDestinoMsgDialog").val('');
-	 $.get("findUserDestino?codEntidade=" + id, function(resposta) {
+	 $.get("buscarUsuarioDestinoMsg?codEntidade=" + id, function(resposta) {
 	        if (resposta != 'erro' && resposta.trim() != ''){
 	        	var entidadeObj = JSON.parse(resposta);
-	        	$("#usr_destinoMsgDialog").val(entidadeObj.ent_codigo);
-	        	$("#loginDestinoMsgDialog").val(validaDescricao(entidadeObj.ent_login));
+	        	$("#usr_destino").val(entidadeObj.ent_codigo);
+	        	$("#loginDestino").val(validaDescricao(entidadeObj.ent_login));
 	        }
 	   })
 	   .always(function() { 

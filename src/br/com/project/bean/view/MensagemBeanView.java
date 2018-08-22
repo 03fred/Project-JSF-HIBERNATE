@@ -1,13 +1,17 @@
 package br.com.project.bean.view;
 
 import javax.faces.bean.ManagedBean;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import br.com.framework.interfac.crud.InterfaceCrud;
 import br.com.project.geral.BeanManagedViewAbstract;
+import br.com.project.geral.controller.EntidadeController;
+import br.com.project.model.classes.Entidade;
 import br.com.project.model.classes.Mensagem;
 
 @Controller
@@ -20,6 +24,9 @@ public class MensagemBeanView extends BeanManagedViewAbstract {
 	
 	@Autowired
 	private ContextoBean contextoBean;
+	
+	@Autowired
+	private EntidadeController entidadeController;
 	
 	@Override
 	public String novo() throws Exception {
@@ -51,6 +58,26 @@ public class MensagemBeanView extends BeanManagedViewAbstract {
 
 	public void setObjetoSelecionado(Mensagem objetoSelecionado) {
 		this.objetoSelecionado = objetoSelecionado;
+	}
+	
+	@RequestMapping("**/buscarUsuarioDestinoMsg")
+	public void buscarUsuariosDestionMsg(HttpServletResponse httpServletResponse, @RequestParam(value="codEntidade") Long codEntidade) throws Exception{
+		Entidade entidade = entidadeController.findByporId(Entidade.class, codEntidade);
+		if(entidade != null) {
+			objetoSelecionado.setUsr_destion(entidade);
+			httpServletResponse.getWriter().write(entidade.getJson().toString());
+		
+		
+		}
+		
+	}
+
+	public EntidadeController getEntidadeController() {
+		return entidadeController;
+	}
+
+	public void setEntidadeController(EntidadeController entidadeController) {
+		this.entidadeController = entidadeController;
 	}
 
 }

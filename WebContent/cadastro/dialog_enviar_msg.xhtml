@@ -160,10 +160,48 @@
 				</p:row>
 			</p:column>
 
+			<p:column>
+				<p:row>
+					<h:outputLabel for="usr_destino" value="Destino : "
+						id="labelDestino" />
+				</p:row>
+			</p:column>
+
+			<p:column>
+				<p:row>
+					<p:inputText id="usr_destino" styleClass="estiloIdCastro"
+						onblur="pesquisarUserDestinoPerderFocoDialog(this.value);addDestinoMsg(this.value);"
+						value="#{mensagemBeanView.objetoSelecionado.usr_destion.ent_codigo}"
+						immediate="false" required="true"
+						requiredMessage="Informe o usuário de destino." />
+
+					<p:inputText id="loginDestino" readonly="true" immediate="true"
+						value="#{mensagemBeanView.objetoSelecionado.usr_destion.ent_login}"
+						required="true" requiredMessage="Informe o usuário de destino."
+						style="width: 350px;" />
+				</p:row>
+			</p:column>
+
+			<p:column>
+				<p:row>
+					<p:message for="usr_destino" />
+				</p:row>
+			</p:column>
+
 		</p:panelGrid>
 
+
+		<p:spacer height="70px;" />
 	</p:panel>
 
+
+	<p:commandButton value="Novo"
+		rendered="#{contextoBean.possuiAcesso('MENSAGENS_ENVIAR_NOVO','ADMIN')}"
+		actionListener="#{mensagenBeanView.novo}" ajax="true" id="buttonNovo"
+		immediate="false" update="formCadastroMsgDialog, :formTemplate:msg">
+		<p:ajax listener="#{mensagemBeanView.novo}"/>
+		
+		</p:commandButton>
 </h:form>
 
 

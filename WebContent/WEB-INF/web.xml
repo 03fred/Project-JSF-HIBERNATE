@@ -189,4 +189,8 @@ id="WebApp_ID" metadata-complete="true" version="3.0">
      <url-pattern>*.jsf</url-pattern>
   </servlet-mapping>
 
+<mime-mapping>
+   <extension>jsp</extension>
+   <mime-type>application/jsp</mime-type>
+</mime-mapping>    
 </web-app>

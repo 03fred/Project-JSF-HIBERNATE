@@ -14,9 +14,6 @@ import br.com.srv.interfaces.SrvEntidade;
 public class EntidadeController extends  ImplementacaoCrud<Entidade> 
 implements InterfaceCrud<Entidade>{
 
-	/**
-	 * 
-	 */
 	@Autowired
 	private SrvEntidade srvEntidade;
 	
