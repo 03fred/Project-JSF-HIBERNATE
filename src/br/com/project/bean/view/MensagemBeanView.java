@@ -47,6 +47,14 @@ public class MensagemBeanView extends BeanManagedViewAbstract {
 
 	@Override
 	public void saveNoReturn() throws Exception {
+		if(objetoSelecionado.getUsr_destion().getEnt_codigo()
+		 .equals(objetoSelecionado.getUsr_origem().getEnt_codigo()))
+		{
+			
+			addMsg("Usuario de origem não pode ser igual o de destino");
+			return;
+		}
+		
 		mensagemController.merge(objetoSelecionado);
 		novo();
 		addMsg("Mensagem Enviada Com Sucesso");
