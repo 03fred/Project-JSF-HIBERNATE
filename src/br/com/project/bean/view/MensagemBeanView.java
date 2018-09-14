@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import br.com.framework.interfac.crud.InterfaceCrud;
 import br.com.project.geral.BeanManagedViewAbstract;
 import br.com.project.geral.controller.EntidadeController;
+import br.com.project.geral.controller.MensagemController;
 import br.com.project.model.classes.Entidade;
 import br.com.project.model.classes.Mensagem;
 
@@ -21,24 +22,34 @@ public class MensagemBeanView extends BeanManagedViewAbstract {
 
 	private static final long serialVersionUID = 1L;
 	private Mensagem objetoSelecionado = new Mensagem();
-	
+
 	@Autowired
 	private ContextoBean contextoBean;
-	
+
 	@Autowired
 	private EntidadeController entidadeController;
-	
+
+	@Autowired
+	private MensagemController mensagemController;
+
 	@Override
 	public String novo() throws Exception {
 		objetoSelecionado = new Mensagem();
 		objetoSelecionado.setUsr_origem(contextoBean.getEntidadeLogada());
-		
+
 		return "";
 	}
 
 	@Override
 	protected Class<?> getClassImplement() {
 		return null;
+	}
+
+	@Override
+	public void saveNoReturn() throws Exception {
+		mensagemController.merge(objetoSelecionado);
+		novo();
+		addMsg("Mensagem Enviada Com Sucesso");
 	}
 
 	@Override
@@ -59,17 +70,17 @@ public class MensagemBeanView extends BeanManagedViewAbstract {
 	public void setObjetoSelecionado(Mensagem objetoSelecionado) {
 		this.objetoSelecionado = objetoSelecionado;
 	}
-	
+
 	@RequestMapping("**/buscarUsuarioDestinoMsg")
-	public void buscarUsuariosDestionMsg(HttpServletResponse httpServletResponse, @RequestParam(value="codEntidade") Long codEntidade) throws Exception{
+	public void buscarUsuariosDestionMsg(HttpServletResponse httpServletResponse,
+			@RequestParam(value = "codEntidade") Long codEntidade) throws Exception {
 		Entidade entidade = entidadeController.findByporId(Entidade.class, codEntidade);
-		if(entidade != null) {
+		if (entidade != null) {
 			objetoSelecionado.setUsr_destion(entidade);
 			httpServletResponse.getWriter().write(entidade.getJson().toString());
-		
-		
+
 		}
-		
+
 	}
 
 	public EntidadeController getEntidadeController() {
@@ -78,6 +89,14 @@ public class MensagemBeanView extends BeanManagedViewAbstract {
 
 	public void setEntidadeController(EntidadeController entidadeController) {
 		this.entidadeController = entidadeController;
+	}
+
+	public MensagemController getMensagemController() {
+		return mensagemController;
+	}
+
+	public void setMensagemController(MensagemController mensagemController) {
+		this.mensagemController = mensagemController;
 	}
 
 }

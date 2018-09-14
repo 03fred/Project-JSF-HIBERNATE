@@ -121,13 +121,14 @@ public class Entidade implements Serializable {
 		return true;
 	}
 	
-	
 	public JSONObject getJson() {
-		Map<Object, Object> map = new HashMap<Object,Object>();
-		map.put("ent_codigo","ent_codigo");
-		map.put("ent_login","ent_login");
-		map.put("ent_nomeFantasia","ent_nomeFantasia");
+		
+		Map<Object,Object> map = new HashMap<Object,Object>();
+		map.put("ent_codigo", ent_codigo);
+		map.put("ent_login", ent_login);
+		map.put("ent_nomeFantasia", ent_nomeFantasia);
+
 		return new JSONObject(map);
 	}
-
+	
 }

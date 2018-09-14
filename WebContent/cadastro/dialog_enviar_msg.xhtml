@@ -199,9 +199,31 @@
 		rendered="#{contextoBean.possuiAcesso('MENSAGENS_ENVIAR_NOVO','ADMIN')}"
 		actionListener="#{mensagenBeanView.novo}" ajax="true" id="buttonNovo"
 		immediate="false" update="formCadastroMsgDialog, :formTemplate:msg">
-		<p:ajax listener="#{mensagemBeanView.novo}"/>
-		
-		</p:commandButton>
+		<p:ajax listener="#{mensagemBeanView.novo}" />
+
+	</p:commandButton>
+
+
+
+	<p:commandButton value="Salvar" 
+		rendered="#{contextoBean.possuiAcesso('MENSAGENS_ENVIAR_NOVO','ADMIN')}"
+		actionListener="#{mensagemBeanView.saveNoReturn}" ajax="true"
+		id="buttonSalvar" immediate="false"
+		partialSubmit="true" process="@this,@form"
+		update="formCadastroMsgDialog, :formTemplate:msg">
+	</p:commandButton>
+
+
+
+
+	<p:commandButton value="Cancelar" onclick="enviarMsgDialog.hide();"
+		actionListener="#{mensagenBeanView.novo}" ajax="true"
+		id="buttonCancelar" immediate="false"
+		update="formCadastroMsgDialog, :formTemplate:msg">
+	</p:commandButton>
+
+
+
 </h:form>
 
 
